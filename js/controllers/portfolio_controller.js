@@ -33,7 +33,18 @@ function(stocks, $scope, StockService, DateService, dates, $stateParams, Portfol
       sum += holding.currentPrice * holding.quantity
     })
     return sum
-  }
+  };
+
+  $scope.getCostBasis = function(day) {
+    if (day === undefined) {
+      day = $scope.dateInfo.currentDate;
+    }
+    var sum = 0;
+    _.forEach($scope.portfolio[day], function(holding){
+      sum += holding.costBasis;
+    })
+    return sum
+  };
 
   $scope.getPrevValue = function(days) {
     var currentIndex = _.indexOf($scope.allDates, $scope.dateInfo.currentDate)
@@ -42,7 +53,7 @@ function(stocks, $scope, StockService, DateService, dates, $stateParams, Portfol
       prevIndex = 0;
     }
     var prevDate = $scope.allDates[prevIndex];
-    return $scope.getPortValue(prevDate);
+    return $scope.getPortValue(prevDate) - $scope.getCostBasis(prevDate);
   }
 
 
