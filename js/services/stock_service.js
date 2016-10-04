@@ -106,7 +106,7 @@ app.factory('StockService', ['$http', '$q', '$window', function($http, $q, $wind
   };
 
   var buildRequest = function(symbol) {
-    var url = 'http://query.yahooapis.com/v1/public/yql?q= '
+    var url = 'https://query.yahooapis.com/v1/public/yql?q= '
     + 'select * from   yahoo.finance.historicaldata '
     + 'where  symbol    = ' + '"' + symbol + '"' + ' '
     + 'and    startDate = "2015-01-01" '
